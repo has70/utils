@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 #define SCE_EPSILONF (0.000001f)
-#define SCE_EPSILOND (0.000000001)
+#define SCE_EPSILOND (1e-9) //0.000000001
 
 #ifdef HAVE_FABSF
 # define SCE_Math_Fabsf fabsf
