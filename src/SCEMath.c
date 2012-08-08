@@ -96,15 +96,14 @@ float SCE_Math_InvSqrt (float number)
     float x2, y;
     const float threehalfs = 1.5F;
 
-    x2 = number * 0.5F;
-    y  = number;
+    x2 = y = number;
     i  = * ( long * ) &y;  /* evil floating point bit level hacking */
-    i  = 0x5f3759df/*a86*/ - ( i >> 1 ); /* what the fuck? */
+    i  = 0x5f3759df/*a86 or d89*/ - ( i >> 1 ); /* what the fuck? */
     y  = * ( float * ) &i;
     /* 1st iteration */
-    y  = y * ( threehalfs - ( x2 * y * y ) );
-    /* 2nd iteration, this can be removed */
-    y  = y * ( threehalfs - ( x2 * y * y ) );
+    y  = y * ( threehalfs - ( (x2* 0.5F) * y * y ) );
+    /* 2nd iteration useless, this can be removed! */
+    //y  = y * ( threehalfs - ( (x2* 0.5F) * y * y ) );
 
     return y;
 #else
